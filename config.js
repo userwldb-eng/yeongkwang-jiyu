@@ -77,6 +77,13 @@ const CONFIG = {
     ]
   },
 
+    // ── 배경음악 ──
+  music: {
+    enabled: true,
+    src: "wedding.mp3",
+    loop: true
+  },
+
   // ── 링크 공유 시 나타나는 문구 ──
   meta: {
     title: "신랑 ♥ 신부 결혼합니다",
