@@ -203,6 +203,73 @@
 
   </main>
 
+  <!-- 🎵 배경음악 -->
+  <audio id="weddingMusic" loop>
+    <source src="wedding.mp3" type="audio/mpeg">
+  </audio>
+
+  <button id="musicButton" aria-label="음악 재생/정지">♫</button>
+
+  <style>
+    #musicButton {
+      position: fixed;
+      right: 18px;
+      top: 18px;
+      z-index: 9999;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255,255,255,0.7);
+      border-radius: 50%;
+      background: rgba(255,255,255,0.85);
+      color: #555;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+    }
+
+    #musicButton.playing {
+      animation: musicRotate 2s linear infinite;
+    }
+
+    @keyframes musicRotate {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+
   <script src="script.js"></script>
+
+  <script>
+    const weddingMusic = document.getElementById("weddingMusic");
+    const musicButton = document.getElementById("musicButton");
+
+    // 화면을 처음 터치하면 음악 재생
+    function startWeddingMusic() {
+      weddingMusic.play().then(() => {
+        musicButton.classList.add("playing");
+      }).catch(() => {});
+    }
+
+    document.addEventListener("click", startWeddingMusic, { once: true });
+    document.addEventListener("touchstart", startWeddingMusic, { once: true });
+
+    // 음악 버튼
+    musicButton.addEventListener("click", function(e) {
+      e.stopPropagation();
+
+      if (weddingMusic.paused) {
+        weddingMusic.play();
+        musicButton.classList.add("playing");
+      } else {
+        weddingMusic.pause();
+        musicButton.classList.remove("playing");
+      }
+    });
+  </script>
+
 </body>
 </html>
